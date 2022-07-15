@@ -27,19 +27,6 @@ parts:
       snapcraftctl build
     organize: 
       xwiki: webapps/xwiki      
-#    organize:
-#      WEB-INF/hibernate.cfg.xml: WEB-INF/oldhibernate.cfg.xml
-#      META-INF: xwiki/META-INF
-#      WEB-INF: xwiki/WEB-INF
-#      redirect: xwiki/redirect
-#      skins: xwiki/skins
-#      templates: xwiki/templates
-#      resources: xwiki/resources
-#      xwiki: webapps/xwiki    
-      
-      
-      
-        
     build-packages:
       - wget
       - unzip
