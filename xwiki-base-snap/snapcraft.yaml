@@ -14,14 +14,32 @@ parts:
     source: https://nexus.xwiki.org/nexus/content/groups/public/org/xwiki/platform/xwiki-platform-distribution-war/13.10.7/xwiki-platform-distribution-war-13.10.7.war
     source-type: zip
     plugin: dump
-    organize:
-      META-INF: xwiki/META-INF
-      WEB-INF: xwiki/WEB-INF
-      redirect: xwiki/redirect
-      skins: xwiki/skins
-      templates: xwiki/templates
-      resources: xwiki/resources
-      xwiki: webapps/xwiki       
+    override-build: |
+      mkdir xwiki
+      mv META-INF xwiki/META-INF
+      mv WEB-INF xwiki/WEB-INF
+      mv redirect xwiki/redirect
+      mv skins xwiki/skins
+      mv templates xwiki/templates
+      mv resources xwiki/resources
+      rm -r xwiki/WEB-INF/hibernate.cfg.xml
+      rm -r xwiki/WEB-INF/xwiki.properties
+      snapcraftctl build
+    organize: 
+      xwiki: webapps/xwiki      
+#    organize:
+#      WEB-INF/hibernate.cfg.xml: WEB-INF/oldhibernate.cfg.xml
+#      META-INF: xwiki/META-INF
+#      WEB-INF: xwiki/WEB-INF
+#      redirect: xwiki/redirect
+#      skins: xwiki/skins
+#      templates: xwiki/templates
+#      resources: xwiki/resources
+#      xwiki: webapps/xwiki    
+      
+      
+      
+        
     build-packages:
       - wget
       - unzip
@@ -93,6 +111,9 @@ parts:
     plugin: dump
     organize:
       setenv.sh: bin/setenv.sh    
+      hibernate.cfg.xml: webapps/xwiki/WEB-INF/hibernate.cfg.xml
+      xwiki.properties: webapps/xwiki/WEB-INF/xwiki.properties
+      mysql-connector-java-8.0.29.jar: webapps/xwiki/WEB-INF/lib/mysql-connector-java-8.0.29.jar
     after: [xwiki]
 
       
@@ -102,5 +123,6 @@ apps:
     daemon: simple
     plugs: [network, network-bind]
     
+
 
 
