@@ -18,7 +18,7 @@ sudo snap install multipass
 
 ## Building the snap
 
-* clone the directory 
+* clone the repository
 * cd into xwiki-base-snap
 * run snapcraft
 
