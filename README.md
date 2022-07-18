@@ -28,7 +28,7 @@ This will build the xwiki_14.4.1_amd64.snap
 
 Make sure you are in the directory where the snap is built
 ```
-sudo snap install xwiki_14.4.1_amd64.sanp --dangerous
+sudo snap install xwiki_14.4.1_amd64.snap --dangerous
 ```
 This will install the snap which is only **mysql compatible**
 
