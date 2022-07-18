@@ -1,4 +1,4 @@
-# packaging-snap
+# Building and installing
 
 
 ## Prerequisits to build
