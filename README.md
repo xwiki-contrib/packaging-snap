@@ -47,7 +47,7 @@ mysql -u root -e "CREATE USER 'xwiki'@'localhost' IDENTIFIED BY 'xwiki'";
 ```
 * Give privileges to the xwiki user for accessing and creating databases (for the multi wiki support). Specifically the xwiki users needs permissions to be able to execute CREATE DATABASE, DROP SCHEMA, and then all CRUD operations on tables. Note that the command below should be tuned to be more restrictive as granting all permissions is not required:
 ```
-mysql -u root -p -e "uninstall plugin validate_password;"
+mysql -u root -e "grant all privileges on *.* to xwiki@localhost"
 ```
 * The mysql JDBC Driver JAR and hibernate.cfg.xml have already been configured for mysql in the snap
 * Restart the snap 
