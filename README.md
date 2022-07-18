@@ -1,7 +1,7 @@
 # Building and installing
 
 
-## Prerequisits to build
+## Prerequisites to build
  
  You'll need to perform 3 mandatory steps to build the snap :
   * [install snapd](https://snapcraft.io/docs/installing-snapd)
@@ -45,7 +45,7 @@ mysql -u root -e "create database xwiki default character set utf8mb4 collate ut
 ```
 mysql -u root -e "CREATE USER 'xwiki'@'localhost' IDENTIFIED BY 'xwiki'";
 ```
-* Give privileges to the xwiki user for accessing and creating databases (for the multi wiki support). Specifically the xwiki users needs permissions to be able to execute CREATE DATABASE, DROP SCHEMA, and then all CRUD operations on tables. Note that the command below should be tuned to be more restrictive as granting all permissions is not required:
+* Give privileges to the xwiki user for accessing and creating databases (for the multi wiki support). Specifically, the xwiki users need permissions to be able to execute CREATE DATABASE, DROP SCHEMA, and then all CRUD operations on tables. Note that the command below should be tuned to be more restrictive as granting all permissions is not required:
 ```
 mysql -u root -e "grant all privileges on *.* to xwiki@localhost"
 ```
