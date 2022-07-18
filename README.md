@@ -55,3 +55,42 @@ mysql -u root -e "grant all privileges on *.* to xwiki@localhost"
 sudo snap restart xwiki.tomcat
 ```
 * now you can launch xwiki: http://localhost:8080/xwiki/bin/view/Main/ 
+
+# Setting up the xwiki-mysql-snap 
+
+This snap consist of three parts:
+* xwiki-14.4.1
+* tomcat-9.0.x
+* mysql-8
+
+The building would be similar to xwiki-base-snap except the installation part:
+
+install the snap in devmode:
+``` 
+sudo snap install xwiki_14.4.1_amd64.snap --devmode
+```
+### Running the snap a system service
+Running mysql as a system service requires root access, but the server itself should never run as root, so it drops privileges to a dedicated user. This user must own the server files and directories. Currently snapd blocks access to creating users and changing process user, so the only way to do this is to disable the restrictions by installing the snap with the --devmode argument.
+
+post installation steps:
+```
+ sudo snap connect xwiki:process-control :process-control
+ xwiki.startup
+ xwiki.client -uroot -p
+```
+
+This should start the mysql server . Then follow the steps mentioned in **Setting up the xwiki-base-snap mysql database** section and your mysql would be ready .
+now you can launch xwiki: http://localhost:8080/xwiki/bin/view/Main/ 
+
+### Files and directories
+The first time you run mysql.startup, it will generate the following in $HOME/snap/xwiki/common (if run as root, /var/snap/xwiki/common is used instead):
+- conf/my.cnf: Basic configuration file
+- data/: Data directoriy
+- files/: Default location for the secure-file-priv option
+- log/: Location of error log
+- run/: Location of sock and pid files
+
+
+
+
+ 
