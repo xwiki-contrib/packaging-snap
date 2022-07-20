@@ -101,6 +101,14 @@ parts:
       hibernate.cfg.xml: webapps/xwiki/WEB-INF/hibernate.cfg.xml
       xwiki.properties: webapps/xwiki/WEB-INF/xwiki.properties
       mysql-connector-java-8.0.29.jar: webapps/xwiki/WEB-INF/lib/mysql-connector-java-8.0.29.jar
+      hsqldb-1.8.0.7.jar: webapps/xwiki/WEB-INF/lib/hsqldb-1.8.0.7.jar
+      mariadb-java-client-3.0.6.jar: webapps/xwiki/WEB-INF/lib/mariadb-java-client-3.0.6.jar
+      postgresql-42.4.0.jar: webapps/xwiki/WEB-INF/lib/postgresql-42.4.0.jar
+      ojdbc8.jar: webapps/xwiki/WEB-INF/lib/ojdbc8.jar
+      db2jcc-db2jcc4.jar: webapps/xwiki/WEB-INF/lib/db2jcc-db2jcc4.jar
+      derby.jar: webapps/xwiki/WEB-INF/lib/derby.jar
+      jtds-1.3.1.jar: webapps/xwiki/WEB-INF/lib/jtds-1.3.1.jar
+      h2-2.1.214.jar: webapps/xwiki/WEB-INF/lib/h2-2.1.214.jar
     after: [xwiki]
 
       
