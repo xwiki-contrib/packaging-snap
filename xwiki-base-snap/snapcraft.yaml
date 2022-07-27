@@ -32,6 +32,7 @@ parts:
       mv resources xwiki/resources
       rm -r xwiki/WEB-INF/hibernate.cfg.xml
       rm -r xwiki/WEB-INF/xwiki.properties
+      rm -r xwiki/WEB-INF/xwiki.cfg
       snapcraftctl build
     organize: 
       xwiki: webapps/xwiki      
@@ -112,6 +113,7 @@ parts:
       setenv.sh: bin/setenv.sh    
       hibernate.cfg.xml: webapps/xwiki/WEB-INF/hibernate.cfg.xml
       xwiki.properties: webapps/xwiki/WEB-INF/xwiki.properties
+      xwiki.cfg: webapps/xwiki/WEB-INF/xwiki.cfg
       mysql-connector-java-8.0.29.jar: webapps/xwiki/WEB-INF/lib/mysql-connector-java-8.0.29.jar
       hsqldb-1.8.0.7.jar: webapps/xwiki/WEB-INF/lib/hsqldb-1.8.0.7.jar
       mariadb-java-client-3.0.6.jar: webapps/xwiki/WEB-INF/lib/mariadb-java-client-3.0.6.jar
