@@ -25,17 +25,19 @@ parts:
       snapcraftctl build
       mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* .
       rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8
+      sed -i '33iexport JRE_HOME=\${SNAP}/usr/lib/jvm/java-11-openjdk-amd64' start_xwiki.sh 
+      sed -i '34iexport JAVA_HOME=\${SNAP}/usr/lib/jvm/java-11-openjdk-amd64' start_xwiki.sh
       chmod u+x start_xwiki.sh
       chmod u+x stop_xwiki.sh
-      
+    override-prime: |
+      snapcraftctl prime
+      rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/blacklisted.certs
     build-packages:
       - ca-certificates
       - ca-certificates-java
       - openjdk-11-jre-headless
     stage-packages:
-      - openjdk-11-jdk    
-    
-    
+      - openjdk-11-jdk       
 apps:
   start:
     command: xwiki-platform-distribution-jetty-hsqldb-13.10.8/start_xwiki.sh
