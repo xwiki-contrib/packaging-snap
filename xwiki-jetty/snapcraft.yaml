@@ -14,12 +14,11 @@ description: XWiki is a free wiki software platform written in Java with a desig
 
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode
-#hooks:
-#       install:
-#         plugs: [network,home]
+hooks:
+       install:
+         plugs: [network,home]
 parts:
   xwiki:
-    # See 'snapcraft plugins'
     plugin: dump
     source: https://nexus.xwiki.org/nexus/content/groups/public/org/xwiki/platform/xwiki-platform-distribution-jetty-hsqldb/13.10.8/xwiki-platform-distribution-jetty-hsqldb-13.10.8.zip
     source-type: zip
@@ -32,13 +31,7 @@ parts:
       chmod u+x stop_xwiki.sh
     override-prime: |
       snapcraftctl prime
-      rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/blacklisted.certs
-    build-packages:
-      - ca-certificates
-      - ca-certificates-java
-      - openjdk-11-jre-headless
-    stage-packages:
-      - openjdk-11-jdk       
+      rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/blacklisted.certs   
 apps:
   start:
     environment:
