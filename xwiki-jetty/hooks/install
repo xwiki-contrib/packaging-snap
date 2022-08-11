@@ -1,5 +1,5 @@
 #! /bin/sh # (there is really no reason to waste 5MB ram to load bash for a simple cp, always use sh if possible)
-
+set -x
 # put target dir name into a variable to make everything shorter and more readable
 TARGET="$SNAP_DATA/xwiki-platform-distribution-jetty-hsqldb-13.10.8"
 
@@ -10,3 +10,4 @@ TARGET="$SNAP_DATA/xwiki-platform-distribution-jetty-hsqldb-13.10.8"
 if [ ! -e $TARGET/stop_xwiki.sh ]; then
   cp $SNAP/xwiki-platform-distribution-jetty-hsqldb-13.10.8/stop_xwiki.sh $TARGET/
 fi
+exit 1
