@@ -1,4 +1,5 @@
 #! /bin/sh 
+
 # put target dir name into a variable to make everything shorter and more readable
 TARGET="$SNAP_DATA/xwiki-platform-distribution-jetty-hsqldb-13.10.8"
 
@@ -7,5 +8,5 @@ TARGET="$SNAP_DATA/xwiki-platform-distribution-jetty-hsqldb-13.10.8"
 
 # copy the script only if it does not yet exist
 if [ ! -e $TARGET/stop_xwiki.sh ]; then
-  cp $SNAP/xwiki-platform-distribution-jetty-hsqldb-13.10.8/stop_xwiki.sh $TARGET/
+  cp -r $SNAP/xwiki-platform-distribution-jetty-hsqldb-13.10.8/* $TARGET/
 fi
