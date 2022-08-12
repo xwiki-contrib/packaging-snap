@@ -16,7 +16,7 @@ grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode
 hooks:
        install:
-         plugs: [network,home]
+          plugs: [network,home]
 parts:
   xwiki:
     plugin: dump
@@ -29,18 +29,8 @@ parts:
       rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8
       chmod u+x start_xwiki.sh
       chmod u+x stop_xwiki.sh
+      
     override-prime: |
       snapcraftctl prime
       rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/blacklisted.certs   
-apps:
-  start:
-    environment:
-      JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
-      PATH: $JAVA_HOME/bin:$PATH
-    command: xwiki-platform-distribution-jetty-hsqldb-13.10.8/start_xwiki.sh
-    plugs: [home,network,network-bind]
-
-  stop:
-    command: xwiki-platform-distribution-jetty-hsqldb-13.10.8/stop_xwiki.sh
-    plugs: [home,network,network-bind]
-    
+  
