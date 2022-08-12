@@ -16,7 +16,7 @@ grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: strict 
 hooks:
        install:
-          plugs: [network,home]
+          plugs: [home]
 parts:
   xwiki:
     plugin: dump
@@ -29,20 +29,24 @@ parts:
     override-prime: |
       snapcraftctl prime
       rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/blacklisted.certs
-    build-packages:
+    stage-packages:
+      - openjdk-11-jdk 
       - ca-certificates
       - ca-certificates-java
       - openjdk-11-jre-headless
-    stage-packages:
-      - openjdk-11-jdk 
  
   scripts:
     source: ./scripts/
     plugin: dump
-    
     override-build: |
       snapcraftctl build
       chmod +x start.sh
+      chmod +x stop.sh           
+    override-prime: |
+      snapcraftctl prime
+      mv start_xwiki.sh xwiki-platform-distribution-jetty-hsqldb-13.10.8/start_xwiki.sh
+      mv stop_xwiki.sh xwiki-platform-distribution-jetty-hsqldb-13.10.8/stop_xwiki.sh
+    after: [xwiki]
 
 apps:
   start:
@@ -51,3 +55,11 @@ apps:
       PATH: $JAVA_HOME/bin:$PATH
     command: ./start.sh
     plugs: [home,network,network-bind]
+  stop:
+    environment:
+      JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
+      PATH: $JAVA_HOME/bin:$PATH
+    command: ./stop.sh
+    plugs: [home,network,network-bind] 
+    
+   
