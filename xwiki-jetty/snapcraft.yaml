@@ -42,11 +42,6 @@ parts:
       snapcraftctl build
       chmod +x start.sh
       chmod +x stop.sh           
-    override-prime: |
-      snapcraftctl prime
-      mv start_xwiki.sh xwiki-platform-distribution-jetty-hsqldb-13.10.8/start_xwiki.sh
-      mv stop_xwiki.sh xwiki-platform-distribution-jetty-hsqldb-13.10.8/stop_xwiki.sh
-    after: [xwiki]
 
 apps:
   start:
