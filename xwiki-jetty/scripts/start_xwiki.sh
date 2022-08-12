@@ -74,7 +74,7 @@ if [ -z "$JETTY_STOP_PORT" ]; then
 fi
 
 # The location where to store the process id
-XWIKI_LOCK_DIR="./"
+XWIKI_LOCK_DIR="./data/"
 
 # Parse script parameters
 while [[ $# > 0 ]]; do
