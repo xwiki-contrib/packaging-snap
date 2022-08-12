@@ -13,7 +13,7 @@ description: XWiki is a free wiki software platform written in Java with a desig
   runs in a Java servlet container such as Tomcat.
 
 grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode
+confinement: strict 
 hooks:
        install:
           plugs: [network,home]
@@ -27,6 +27,15 @@ parts:
       snapcraftctl build
       mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* .
       rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8
-      chmod u+x start_xwiki.sh
-      chmod u+x stop_xwiki.sh
+  scripts:
+    source: ./scripts/
+    plugin: dump
     
+    override-build: |
+      snapcraftctl build
+      chmod +x start.sh
+
+apps:
+  start:
+    command: ./start.sh
+    plugs: [home,network,network-bind]
