@@ -21,12 +21,21 @@ parts:
   xwiki:
     plugin: dump
     source: https://nexus.xwiki.org/nexus/content/groups/public/org/xwiki/platform/xwiki-platform-distribution-jetty-hsqldb/13.10.8/xwiki-platform-distribution-jetty-hsqldb-13.10.8.zip
-    source-type: zip
-    
+    source-type: zip    
     override-build: |
       snapcraftctl build
       mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* .
       rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8
+    override-prime: |
+      snapcraftctl prime
+      rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/blacklisted.certs
+    build-packages:
+      - ca-certificates
+      - ca-certificates-java
+      - openjdk-11-jre-headless
+    stage-packages:
+      - openjdk-11-jdk 
+ 
   scripts:
     source: ./scripts/
     plugin: dump
@@ -37,5 +46,8 @@ parts:
 
 apps:
   start:
+    environment:
+      JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
+      PATH: $JAVA_HOME/bin:$PATH
     command: ./start.sh
     plugs: [home,network,network-bind]
