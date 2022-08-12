@@ -14,9 +14,6 @@ description: XWiki is a free wiki software platform written in Java with a desig
 
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode
-hooks:
-       install:
-         plugs: [network,home]
 parts:
   xwiki:
     plugin: dump
@@ -33,6 +30,9 @@ parts:
       snapcraftctl prime
       rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/blacklisted.certs   
 apps:
+  setup:
+   command: wrapper
+   plugs: [home,network,network-bind]
   start:
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
