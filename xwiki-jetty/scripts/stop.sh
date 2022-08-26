@@ -1,2 +1,2 @@
 #!/bin/bash
-$SNAP_COMMON/stop_xwiki.sh -ld ./data/
+$SNAP_DATA/stop_xwiki.sh -ld ./data/

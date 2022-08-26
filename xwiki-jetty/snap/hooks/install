@@ -1,7 +1,7 @@
 #! /bin/sh 
 
 # put target dir name into a variable to make everything shorter and more readable
-TARGET="$SNAP_COMMON/"
+TARGET="$SNAP_DATA/"
 
 # make sure the dir we want to copy to is actually existing
 [ -d $TARGET ] || mkdir -p $TARGET

@@ -26,10 +26,7 @@ parts:
       snapcraftctl build
       mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* .
       rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8
-    override-prime: |
-      snapcraftctl prime
-      rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/blacklisted.certs
-      rm -vf usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts
+
     stage-packages:
       - openjdk-11-jdk 
       - ca-certificates
@@ -52,8 +49,7 @@ parts:
       mv db2jcc-db2jcc4.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
       mv derby.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
       mv jtds-1.3.1.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
-      mv h2-2.1.214.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/   
-
+      mv h2-2.1.214.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/ 
       
     after: [xwiki]
 

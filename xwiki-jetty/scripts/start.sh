@@ -1,2 +1,2 @@
 #!/bin/bash
-$SNAP_COMMON/start_xwiki.sh -ld ./data/
+$SNAP_DATA/start_xwiki.sh -ld ./data/
