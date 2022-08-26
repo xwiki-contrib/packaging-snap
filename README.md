@@ -1,5 +1,27 @@
 # Building and installing
 
+## Install the snap from the Snapcraft Store
+
+Simply run the following command
+```
+sudo snap install xwiki --edge
+```
+
+## Running the snap
+
+#### To start XWiki run:
+```
+sudo xwiki.start
+```
+
+#### To stop XWiki run:
+```
+sudo xwiki.stop
+```
+
+## Editing configuration files 
+
+All the config files are avalible in ` /var/snap/xwiki/18/* ` . Edit the config files here and then restart XWiki to see the changes take place.
 
 ## Prerequisites to build
  
@@ -31,7 +53,7 @@ Make sure you are in the directory where the snap is built
 sudo snap install xwiki_13.10.8_amd64.snap --dangerous
 ```
 
-## NOTE:xwiki-base-snap and xwiki-mysql-snap has been replaced by xwiki-jetty package 
+## NOTE: xwiki-base-snap and xwiki-mysql-snap has been replaced by xwiki-jetty package 
 
 # Setting up the xwiki-base-snap mysql database **(obsolete)**
 
