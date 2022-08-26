@@ -19,19 +19,19 @@ sudo snap install multipass
 ## Building the snap
 
 * clone the repository
-* cd into xwiki-base-snap
+* cd into xwiki-jetty
 * run snapcraft
 
-This will build the xwiki_14.4.1_amd64.snap
+This will build the xwiki_13.10.8_amd64.snap
 
 ## Installing the snap 
 
 Make sure you are in the directory where the snap is built
 ```
-sudo snap install xwiki_14.4.1_amd64.snap --dangerous
+sudo snap install xwiki_13.10.8_amd64.snap --dangerous
 ```
 
-# xwiki-base-snap and xwiki-mysql-snap has been replaced by xwiki-jetty package 
+## NOTE:xwiki-base-snap and xwiki-mysql-snap has been replaced by xwiki-jetty package 
 
 # Setting up the xwiki-base-snap mysql database **(obsolete)**
 
