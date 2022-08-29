@@ -24,7 +24,7 @@ parts:
     source-type: zip    
     override-build: |
       snapcraftctl build
-      mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* .
+      mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* . 
       rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8  
       mv $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk-* $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk
       rm $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/cacerts
@@ -39,19 +39,20 @@ parts:
     stage-packages:
     - openjdk-11-jre-headless
     - openjdk-11-jdk 
+    - diffutils
 
-    
- 
   scripts:
     source: ./scripts/
     plugin: dump
     override-build: |
       chmod +x start.sh
       chmod +x stop.sh     
+      chmod +x copy.sh
+      sudo chmod +x update.sh
       snapcraftctl build 
-    override-prime: |
+    override-prime: | 
       snapcraftctl prime
-      mv mysql-connector-java-8.0.29.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
+      mv mysql-connector-java-8.0.29.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/ 
       mv mariadb-java-client-3.0.6.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
       mv postgresql-42.4.0.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
       mv ojdbc8.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
@@ -75,5 +76,10 @@ apps:
       PATH: $JAVA_HOME/bin:$PATH
     command: ./stop.sh
     plugs: [home,network,network-bind] 
-    
+  save:
+    command: ./copy.sh
+    plugs: [home]  
+  update:
+    command: ./update.sh
+    plugs: [home]    
    
