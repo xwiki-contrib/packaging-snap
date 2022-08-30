@@ -16,7 +16,7 @@ grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: strict
 hooks:
        install:
-          plugs: [home]
+          plugs: [home] # home plugin might be required in some cases
 parts:
   xwiki:
     plugin: dump
@@ -25,13 +25,16 @@ parts:
     override-build: |
       snapcraftctl build
       mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* . 
-      rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8  
-      mv $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk-* $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk
+      rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8  # removed the redundant xwiki-platform-distribution-jetty-hsqlbd-13.10.8 folder in line 29
+      mv $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk-* $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk #renamed java directory
+      
       rm $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/cacerts
       rm $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/blacklisted.certs
       cp /etc/ssl/certs/java/cacerts $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/cacerts
       cp /etc/ssl/certs/java/cacerts $SNAPCRAFT_PART_INSTALL/etc/ssl/certs/java/cacerts
+      #removed the dangling symlink error from java/cacerts file
 
+    #The following packages are required to replace dangling symlink for the java/cacerts 
     build-packages:
     - ca-certificates
     - ca-certificates-java
@@ -52,6 +55,7 @@ parts:
       snapcraftctl build 
     override-prime: | 
       snapcraftctl prime
+      # moving all the connectors from script to their required location
       mv mysql-connector-java-8.0.29.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/ 
       mv mariadb-java-client-3.0.6.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
       mv postgresql-42.4.0.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
