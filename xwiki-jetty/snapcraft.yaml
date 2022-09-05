@@ -24,20 +24,24 @@ parts:
     source-type: zip    
     override-build: |
       snapcraftctl build
+      
+      #remvoed redundant xwiki-paltform-distribution-jetty-hsqldb-13.10.8/ folder
       mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* . 
-      rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8  
+      rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8
+        
+      #renamed java-11-openjdk-* to java-11-oopenjdk
       mv $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk-* $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk
+      
+      #removed java/cecerts and blacklisted.certs as it has external symlink
       rm $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/cacerts
       rm $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/blacklisted.certs
+      
+      # replaced java/cecerts to prevent XWiki security error
       cp /etc/ssl/certs/java/cacerts $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/cacerts
       cp /etc/ssl/certs/java/cacerts $SNAPCRAFT_PART_INSTALL/etc/ssl/certs/java/cacerts
 
-    build-packages:
-    - ca-certificates
-    - ca-certificates-java
-    - openjdk-11-jre-headless
+# openjdk-11-jdk is required for java home variable and other build packages are required during building process.
     stage-packages:
-    - openjdk-11-jre-headless
     - openjdk-11-jdk 
 
   scripts:
@@ -49,6 +53,7 @@ parts:
       snapcraftctl build 
     override-prime: | 
       snapcraftctl prime
+      #moved all the java connectors to their respective positions
       mv mysql-connector-java-8.0.29.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/ 
       mv mariadb-java-client-3.0.6.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
       mv postgresql-42.4.0.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
