@@ -21,7 +21,7 @@ sudo xwiki.stop
 
 ## Editing configuration files 
 
-All the config files are avalible in ` /var/snap/xwiki/18/* ` . Edit the config files here and then restart XWiki to see the changes take place.
+All the config files are avalible in ` /var/snap/xwiki/<revision>/* ` . Edit the config files here and then restart XWiki to see the changes take place.
 
 ## Prerequisites to build
  
