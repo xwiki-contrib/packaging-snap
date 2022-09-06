@@ -40,7 +40,7 @@ parts:
       cp /etc/ssl/certs/java/cacerts $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/cacerts
       cp /etc/ssl/certs/java/cacerts $SNAPCRAFT_PART_INSTALL/etc/ssl/certs/java/cacerts
 
-# openjdk-11-jdk is required for java home variable and other build packages are required during building process.
+# openjdk-11-jdk is required for java home variable 
     stage-packages:
     - openjdk-11-jdk 
 
