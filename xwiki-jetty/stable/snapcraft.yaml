@@ -24,10 +24,12 @@ parts:
     source-type: zip    
     override-build: |
       snapcraftctl build
+      folder_name="xwiki-platform-distribution-jetty-hsqldb-"
+      version="14.7"
       
       #remvoed redundant xwiki-paltform-distribution-jetty-hsqldb-13.10.8/ folder
-      mv xwiki-platform-distribution-jetty-hsqldb-13.10.8/* . 
-      rm -r xwiki-platform-distribution-jetty-hsqldb-13.10.8
+      mv $folder_name$version/* . 
+      rm -r $folder_name$version
         
       #renamed java-11-openjdk-* to java-11-oopenjdk
       mv $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk-* $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk
@@ -39,10 +41,14 @@ parts:
       # replaced java/cecerts to prevent XWiki security error
       cp /etc/ssl/certs/java/cacerts $SNAPCRAFT_PART_INSTALL/usr/lib/jvm/java-11-openjdk/lib/security/cacerts
       cp /etc/ssl/certs/java/cacerts $SNAPCRAFT_PART_INSTALL/etc/ssl/certs/java/cacerts
-
-# openjdk-11-jdk is required for java home variable 
+# openjdk-11-jdk is required for java home variable and other build packages are required during building process.
+    build-packages:
+    - ca-certificates
+    - ca-certificates-java
+    - openjdk-11-jre-headless
     stage-packages:
     - openjdk-11-jdk 
+    - openjdk-11-jre-headless
 
   scripts:
     source: ./scripts/
@@ -53,15 +59,18 @@ parts:
       snapcraftctl build 
     override-prime: | 
       snapcraftctl prime
+      folder_name="xwiki-platform-distribution-jetty-hsqldb-"
+      version="14.7"
+      
       #moved all the java connectors to their respective positions
-      mv mysql-connector-java-8.0.29.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/ 
-      mv mariadb-java-client-3.0.6.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
-      mv postgresql-42.4.0.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
-      mv ojdbc8.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
-      mv db2jcc-db2jcc4.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
-      mv derby.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
-      mv jtds-1.3.1.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/
-      mv h2-2.1.214.jar xwiki-platform-distribution-jetty-hsqldb-13.10.8/webapps/xwiki/WEB-INF/lib/ 
+      mv mysql-connector-java-8.0.29.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/ 
+      mv mariadb-java-client-3.0.6.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/
+      mv postgresql-42.4.0.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/
+      mv ojdbc8.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/
+      mv db2jcc-db2jcc4.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/
+      mv derby.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/
+      mv jtds-1.3.1.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/
+      mv h2-2.1.214.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/ 
       
     after: [xwiki]
 
