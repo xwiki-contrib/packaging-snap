@@ -1,3 +1,9 @@
+# XWiki Snap
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/xwiki)
+
+This is the repository of [the XWiki snap](https://snapcraft.io/xwiki).
+
 # Building and installing
 
 ## Install the snap from the Snapcraft Store
