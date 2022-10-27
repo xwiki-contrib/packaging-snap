@@ -27,18 +27,16 @@ sudo xwiki.stop
 
 ## Editing configuration files 
 
-All the config files are avalible in ` /var/snap/xwiki/<revision>/* ` . Edit the config files here and then restart XWiki to see the changes take place.
+All the config files are avalible in ` /var/snap/xwiki/<revision>/* `. Edit the config files here and then restart XWiki to see the changes take place.
 
 ## Prerequisites to build
  
- You'll need to perform 3 mandatory steps to build the snap :
-  * [install snapd](https://snapcraft.io/docs/installing-snapd)
-  * [installing snapcraft and multipass](https://snapcraft.io/docs/snapcraft-overview)
-  * building the XWiki snap
+You'll need to perform 3 mandatory steps to build the snap:
+* [install snapd](https://snapcraft.io/docs/installing-snapd)
+* [installing snapcraft and multipass](https://snapcraft.io/docs/snapcraft-overview)
+* building the XWiki snap
 
-
-
-Run the following commands to install **snapcraft** and **multipass** after installing snapd :
+Run the following commands to install **snapcraft** and **multipass** after installing snapd:
 ```
 sudo snap install snapcraft --classic
 sudo snap install multipass
@@ -50,16 +48,16 @@ sudo snap install multipass
 * cd into xwiki-jetty
 * run snapcraft
 
-This will build the xwiki_13.10.8_amd64.snap
+This will build the xwiki_13.10.8_amd64.snap.
 
 ## Installing the snap 
 
-Make sure you are in the directory where the snap is built
+Make sure you are in the directory where the snap is built.
 ```
 sudo snap install xwiki_13.10.8_amd64.snap --dangerous
 ```
 
-## NOTE: xwiki-base-snap and xwiki-mysql-snap has been replaced by xwiki-jetty package 
+## NOTE: xwiki-base-snap and xwiki-mysql-snap has been replaced by xwiki-jetty package .
 
 # Setting up the xwiki-base-snap mysql database **(obsolete)**
 
@@ -73,7 +71,7 @@ mysql -u root -e "create database xwiki default character set utf8mb4 collate ut
 ```
 mysql -u root -e "CREATE USER 'xwiki'@'localhost' IDENTIFIED BY 'xwiki'";
 ```
-* Give privileges to the xwiki user for accessing and creating databases (for the multi wiki support). Specifically, the xwiki users need permissions to be able to execute CREATE DATABASE, DROP SCHEMA, and then all CRUD operations on tables. Note that the command below should be tuned to be more restrictive as granting all permissions is not required:
+* Give privileges to the xwiki user for accessing and creating databases (for the multi wiki support). Specifically, the xwiki users need permissions to be able to execute `CREATE DATABASE`, `DROP SCHEMA`, and then all CRUD operations on tables. Note that the command below should be tuned to be more restrictive as granting all permissions is not required:
 ```
 mysql -u root -e "grant all privileges on *.* to xwiki@localhost"
 ```
@@ -107,8 +105,8 @@ post installation steps:
  xwiki.client -uroot -p
 ```
 
-This should start the mysql server . Then follow the steps mentioned in **Setting up the xwiki-base-snap mysql database** section and your mysql would be ready .
-now you can launch xwiki: http://localhost:8080/xwiki/bin/view/Main/ 
+This should start the mysql server. Then follow the steps mentioned in **Setting up the xwiki-base-snap mysql database** section and your mysql would be ready .
+now you can launch xwiki: http://localhost:8080/xwiki/bin/view/Main/
 
 ### Files and directories 
 The first time you run mysql.startup, it will generate the following in $HOME/snap/xwiki/common (if run as root, /var/snap/xwiki/common is used instead):
