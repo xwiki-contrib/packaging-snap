@@ -44,11 +44,29 @@ sudo snap install multipass
 
 ## Building the snap
 
-* clone the repository
-* cd into xwiki-jetty
-* run snapcraft
+#### Clone the repository
+  ```
+  git clone https://github.com/xwiki-contrib/packaging-snap.git
+  ```
 
-This will build the xwiki_13.10.8_amd64.snap.
+#### Change directory to ```xwiki-jetty```:
+> There are 2 channels inside the ```xwiki-jetty``` directory, namely ``stable`` and ``edge``
+
+  ```
+  cd packaging-snap/xwiki-jetty/stable
+  ```
+  **or**
+
+  ```
+  cd packaging-snap/xwiki-jetty/edge
+  ```
+
+#### Run snapcraft
+  ```
+  snapcraft
+  ```
+
+This will build the xwiki_13.10.8_amd64.snap. Next step is to install the snap!
 
 ## Installing the snap 
 
@@ -56,6 +74,7 @@ Make sure you are in the directory where the snap is built.
 ```
 sudo snap install xwiki_13.10.8_amd64.snap --dangerous
 ```
+<hr>
 
 ## NOTE: xwiki-base-snap and xwiki-mysql-snap has been replaced by xwiki-jetty package .
 
