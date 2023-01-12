@@ -8,5 +8,5 @@ TARGET="$SNAP_DATA/"
 
 # copy the script only if it does not yet exist
 if [ ! -e $TARGET/stop_xwiki.sh ]; then
-  cp -r $SNAP/xwiki-platform-distribution-jetty-hsqldb-14.10/* $TARGET/
+  cp -r $SNAP/xwiki-platform-distribution-jetty-hsqldb-14.10.3/* $TARGET/
 fi
