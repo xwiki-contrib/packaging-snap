@@ -1,0 +1,25 @@
+name: Build and Deploy Snap Package
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install Snapcraft CLI
+        run: |
+          sudo snap install snapcraft --classic
+      - name: Build Snap Package
+        run: |
+          snapcraft
+      - name: Deploy Snap Package
+        uses: 'daniel-vera-g/snapcraft-push@v2.2'
+        with:
+          file: './my-snap-package_1.0_amd64.snap'
+          snap: 'my-snap-package'
+          channel: 'stable'
+        env:
+          SNAPCRAFT_LOGIN: ${{ secrets.SNAPCRAFT_LOGIN }}
+          SNAPCRAFT_TOKEN: ${{ secrets.SNAPCRAFT_TOKEN }}
