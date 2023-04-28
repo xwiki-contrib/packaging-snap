@@ -26,9 +26,10 @@ jobs:
     - run: |
         sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
     # Do some testing with the snap
-    - uses: actions/upload-artifact@v3
+    - uses: snapcore/action-publish@v1
       with:
-        name: gbeuzeboc-snapped-ros2-pkg
-        path: ${{ steps.build-snap.outputs.snap }}
+        store_login: ${{ secrets.STORE_LOGIN }}
+        snap: ${{ steps.build.outputs.snap }}
+        release: edge
 
 
