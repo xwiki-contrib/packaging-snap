@@ -20,7 +20,7 @@ jobs:
     - uses: snapcore/action-build@v1
       id: build-snap
       with:
-        path: '/xwiki-jetty/stable/'
+        path: './xwiki-jetty/stable/'
 
     # Make sure the snap is installable
     - run: |
