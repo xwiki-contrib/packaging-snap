@@ -17,10 +17,10 @@ jobs:
       snap-file: ${{ steps.build-snap.outputs.snap }}
     steps:
     - uses: actions/checkout@v3
-    - run: |
-        cd xwiki-jetty/stable/
     - uses: snapcore/action-build@v1
       id: build-snap
+      with:
+        path: '/xwiki-jetty/stable/'
 
     # Make sure the snap is installable
     - run: |
