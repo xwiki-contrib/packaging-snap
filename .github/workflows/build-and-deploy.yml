@@ -27,8 +27,9 @@ jobs:
         sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
     # Do some testing with the snap
     - uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
       with:
-        store_login: ${{ secrets.STORE_LOGIN }}
         snap: ${{ steps.build-snap.outputs.snap }}
         release: edge
 
