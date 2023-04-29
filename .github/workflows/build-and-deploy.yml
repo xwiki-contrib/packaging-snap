@@ -26,7 +26,7 @@ jobs:
     - run: |
         sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
     # Do some testing with the snap
-    - name : no timeout
+    - name : timeout
       run: |
         timeout 60 sudo xwiki.start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
     - uses: snapcore/action-publish@v1
