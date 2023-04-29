@@ -29,7 +29,7 @@ jobs:
     - name : timeout
       timeout-minutes: 1
       run: |
-        timeout 60 xwiki.start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+        timeout 60 sudo xwiki.start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
     - uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
