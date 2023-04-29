@@ -27,7 +27,7 @@ jobs:
         sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
     # Do some testing with the snap
     - run: |
-        timeout 60 sudo xwiki.start
+        timeout -k 60 60 sudo xwiki.start
     - uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
