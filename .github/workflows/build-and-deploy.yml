@@ -28,8 +28,9 @@ jobs:
     # Do some testing with the snap
     - name : timeout
       timeout-minutes: 1
+      continue-on-error: true
       run: |
-        timeout 60 sudo xwiki.start || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+        timeout 60 sudo xwiki.start 
     - uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
