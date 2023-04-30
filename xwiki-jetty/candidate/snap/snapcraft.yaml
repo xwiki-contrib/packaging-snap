@@ -1,6 +1,6 @@
 name: xwiki # you probably want to 'snapcraft register <name>'
-base: core20 # the base snap is the execution environment for this snap
-version: '15.3' # just for humans, typically '1.2+git' or '1.3.2'
+base: core18 # the base snap is the execution environment for this snap
+version: '15.2' # just for humans, typically '1.2+git' or '1.3.2'
 summary:  XWiki 
 description: XWiki is a free wiki software platform written in Java with a design emphasis
  on extensibility.
@@ -20,13 +20,13 @@ hooks:
 parts:
   xwiki:
     plugin: dump
-    source: https://nexus.xwiki.org/nexus/content/groups/public/org/xwiki/platform/xwiki-platform-distribution-jetty-hsqldb/15.3/xwiki-platform-distribution-jetty-hsqldb-15.3.zip
+    source: https://nexus.xwiki.org/nexus/content/groups/public/org/xwiki/platform/xwiki-platform-distribution-jetty-hsqldb/15.2/xwiki-platform-distribution-jetty-hsqldb-15.2.zip
     
     source-type: zip    
     override-build: |
       snapcraftctl build
       folder_name="xwiki-platform-distribution-jetty-hsqldb-"
-      version="15.3"
+      version="15.2"
       #remvoed redundant xwiki-paltform-distribution-jetty-hsqldb-14.10/ folder
       mv $folder_name$version/* . 
       rm -r $folder_name$version
@@ -62,7 +62,7 @@ parts:
       snapcraftctl prime
       #variables
       folder_name="xwiki-platform-distribution-jetty-hsqldb-"
-      version="15.3"
+      version="15.2"
       
       #moved all the java connectors to their respective positions
       mv mysql-connector-java-8.0.29.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/ 
