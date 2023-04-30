@@ -11,7 +11,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  stable-snap:
+    build:
     runs-on: ubuntu-latest
     outputs:
       snap-file: ${{ steps.build-snap.outputs.snap }}
@@ -37,8 +38,9 @@ jobs:
       with:
         snap: ${{ steps.build-snap.outputs.snap }}
         release: stable
-job2:
-  build:
+  candidate-snap:
+    needs: stable-snap
+    build:
     runs-on: ubuntu-latest
     outputs:
       snap-file: ${{ steps.build-snap.outputs.snap }}
@@ -64,4 +66,8 @@ job2:
       with:
         snap: ${{ steps.build-snap.outputs.snap }}
         release: candidate
+  
+  
+  
+
   
