@@ -12,7 +12,6 @@ on:
 
 jobs:
   stable-snap:
-    build:
     runs-on: ubuntu-latest
     outputs:
       snap-file: ${{ steps.build-snap.outputs.snap }}
@@ -40,7 +39,6 @@ jobs:
         release: stable
   candidate-snap:
     needs: stable-snap
-    build:
     runs-on: ubuntu-latest
     outputs:
       snap-file: ${{ steps.build-snap.outputs.snap }}
