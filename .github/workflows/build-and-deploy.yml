@@ -1,0 +1,71 @@
+name: snap
+on:
+  push:
+    tags:
+      - '*'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  stable-snap:
+    runs-on: ubuntu-latest
+    outputs:
+      snap-file: ${{ steps.build-snap.outputs.snap }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: snapcore/action-build@v1
+      id: build-snap
+      with:
+        path: './xwiki-jetty/stable/'
+
+    # Make sure the snap is installable
+    - run: |
+        sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
+    # Do some testing with the snap
+    - name : timeout
+      timeout-minutes: 1
+      continue-on-error: true
+      run: |
+        timeout 60 sudo xwiki.start 
+    - uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
+      with:
+        snap: ${{ steps.build-snap.outputs.snap }}
+        release: stable
+  candidate-snap:
+    needs: stable-snap
+    runs-on: ubuntu-latest
+    outputs:
+      snap-file: ${{ steps.build-snap.outputs.snap }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: snapcore/action-build@v1
+      id: build-snap
+      with:
+        path: './xwiki-jetty/candidate/'
+
+    # Make sure the snap is installable
+    - run: |
+        sudo snap install --dangerous ${{ steps.build-snap.outputs.snap }}
+    # Do some testing with the snap
+    - name : timeout
+      timeout-minutes: 1
+      continue-on-error: true
+      run: |
+        timeout 60 sudo xwiki.start 
+    - uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
+      with:
+        snap: ${{ steps.build-snap.outputs.snap }}
+        release: candidate
+  
+  
+  
+
+  
