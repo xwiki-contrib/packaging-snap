@@ -20,13 +20,13 @@ hooks:
 parts:
   xwiki:
     plugin: dump
-    source: https://nexus.xwiki.org/nexus/content/groups/public/org/xwiki/platform/xwiki-platform-distribution-jetty-hsqldb/15.5/xwiki-platform-distribution-jetty-hsqldb-15.5.zip
+    source: https://nexus.xwiki.org/nexus/content/groups/public/org/xwiki/platform/xwiki-platform-distribution-jetty-hsqldb/15.5.1/xwiki-platform-distribution-jetty-hsqldb-15.5.1.zip
     
     source-type: zip    
     override-build: |
       snapcraftctl build
       folder_name="xwiki-platform-distribution-jetty-hsqldb-"
-      version="15.5"
+      version="15.5.1"
       #remvoed redundant xwiki-paltform-distribution-jetty-hsqldb-14.10/ folder
       mv $folder_name$version/* . 
       rm -r $folder_name$version
@@ -62,7 +62,7 @@ parts:
       snapcraftctl prime
       #variables
       folder_name="xwiki-platform-distribution-jetty-hsqldb-"
-      version="15.5"
+      version="15.5.1"
       
       #moved all the java connectors to their respective positions
       mv mysql-connector-java-8.0.29.jar $folder_name$version/webapps/xwiki/WEB-INF/lib/ 
